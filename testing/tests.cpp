@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "log_tests.cpp"
+#include "file_tests.cpp"
 
 int main(int argc, char **argv)
 {

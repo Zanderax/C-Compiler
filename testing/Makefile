@@ -123,6 +123,33 @@ runTests.out/fast:
 	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/build
 .PHONY : runTests.out/fast
 
+home/wizard/c_compiler/src/file.o: home/wizard/c_compiler/src/file.cpp.o
+
+.PHONY : home/wizard/c_compiler/src/file.o
+
+# target to build an object file
+home/wizard/c_compiler/src/file.cpp.o:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/c_compiler/src/file.cpp.o
+.PHONY : home/wizard/c_compiler/src/file.cpp.o
+
+home/wizard/c_compiler/src/file.i: home/wizard/c_compiler/src/file.cpp.i
+
+.PHONY : home/wizard/c_compiler/src/file.i
+
+# target to preprocess a source file
+home/wizard/c_compiler/src/file.cpp.i:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/c_compiler/src/file.cpp.i
+.PHONY : home/wizard/c_compiler/src/file.cpp.i
+
+home/wizard/c_compiler/src/file.s: home/wizard/c_compiler/src/file.cpp.s
+
+.PHONY : home/wizard/c_compiler/src/file.s
+
+# target to generate assembly for a file
+home/wizard/c_compiler/src/file.cpp.s:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/c_compiler/src/file.cpp.s
+.PHONY : home/wizard/c_compiler/src/file.cpp.s
+
 home/wizard/c_compiler/src/logger.o: home/wizard/c_compiler/src/logger.cpp.o
 
 .PHONY : home/wizard/c_compiler/src/logger.o
@@ -186,6 +213,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... runTests.out"
+	@echo "... home/wizard/c_compiler/src/file.o"
+	@echo "... home/wizard/c_compiler/src/file.i"
+	@echo "... home/wizard/c_compiler/src/file.s"
 	@echo "... home/wizard/c_compiler/src/logger.o"
 	@echo "... home/wizard/c_compiler/src/logger.i"
 	@echo "... home/wizard/c_compiler/src/logger.s"

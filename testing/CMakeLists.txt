@@ -8,6 +8,7 @@ include_directories(${GTEST_INCLUDE_DIRS},)
 
 set( files
 	../src/logger.cpp
+	../src/file.cpp
 )
 
 # Link runTests with our tests
