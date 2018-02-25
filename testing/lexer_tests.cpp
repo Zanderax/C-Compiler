@@ -16,5 +16,4 @@ TEST( LexerTest, ParseIntoSymbols )
 	lexer.Parse( c, symbols );
 
 	ASSERT_EQ( symbols.size(), 16 ); 
-		
 }
