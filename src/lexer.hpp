@@ -4,8 +4,16 @@
 #include <vector>
 #include <string>
 
+enum SymType
+{
+	NONE,
+	TEXT,
+	PUNCT
+};
+
 struct Symbol
 {
+	SymType type;
 	int length;
 };
 

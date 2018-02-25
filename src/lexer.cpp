@@ -7,7 +7,7 @@ bool isLetter( char c )
 	return ( c >= 65 && c <= 90 ) || ( c >= 97 && c <= 122 );
 }
 
-bool isSymbolChar( char c )
+bool isPunct( char c )
 {
 	return (c == '{' || 
 			c == '}' || 
@@ -18,66 +18,41 @@ bool isSymbolChar( char c )
 			c == ',' ); 
 }
 
-bool isSpace( char c )
+bool isWhiteSpace( char c )
 {
 	return (c == ' '  || 
 			c == '\n' ||  
 			c == '\t' ); 
 }
 
-
-int readSymbol( std::string str, int len, int & pos )
+void Lexer::Parse( std::string source, Symbols & symbols ) 
 {
-	int symLen = 0;
 	Logger logger;
-	while(pos < len)
+	int len = source.size();
+	int symLen = 0;
+
+	for(int pos = 0; pos < len; ++pos)
 	{
-		char c = str.at(pos);
+		char c = source.at(pos);
+
 		if(isLetter(c))
 		{
-			pos++;
 			symLen++;
 			continue;
 		}
-
-		if(isSymbolChar(c))
+		
+		if(symLen != 0)
 		{
-			if(symLen == 0)
-			{
-				pos++;
-				return 1;
-			}
-			return symLen;
+			Symbol symbol{SymType::TEXT, symLen};
+			symbols.push_back(symbol);
+			symLen = 0;
 		}
 
-		if(isSpace(c))
+		if(isPunct(c))
 		{
-			pos++;
-			if(symLen == 0)
-			{
-				continue;
-			}
-			return symLen;
+			Symbol symbol{SymType::PUNCT, 1};
+			symbols.push_back(symbol);
+			symLen = 0;
 		}
-		return 0;
-	}
-	return symLen;
-}
-
-void Lexer::Parse( std::string c, Symbols & symbols ) 
-{
-	int len = c.size();
-	int pos = 0;
-	Logger logger;
-	while( pos < len )
-	{
-		int symbolLength = readSymbol( c, len, pos );
-		if(symbolLength == 0)
-		{
-			return;
-		}
-		Symbol symbol;
-		symbol.length = symbolLength;
-		symbols.push_back(symbol);
 	}
 }
