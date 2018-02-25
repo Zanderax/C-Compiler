@@ -26,11 +26,15 @@ Logger::Logger( Output outputIn, std::string outputFileIn )
 	if( outputIn != Output::LOGFILE )
 	{
 		log( "Initalizing Logger with a file name but output type is"
-			" not set to FILE",
+			" not set to LOGFILE",
 			Severity::Warning );
 	}
 	output = outputIn;
 	outputFile = outputFileIn;
+
+	std::ofstream file;
+	file.open( outputFile, std::ofstream::out | std::ofstream::trunc );
+	file.close();
 }
 
 void Logger::log( const char * msg )
@@ -48,7 +52,8 @@ void Logger::log( const char * msg )
 			std::cerr << time << " - " << msg << std::endl;
 			break;
 		case Output::LOGFILE:
-			std::ofstream file(outputFile);
+			std::ofstream file;
+			file.open(outputFile, std::ofstream::out | std::ofstream::app);
 			file << time << " - " << msg << std::endl;
 			file.close();
 			break;	
@@ -76,7 +81,8 @@ void Logger::log( const char * msg, Severity severity )
 			std::cerr << time << " - [" << severityString << "] - " << msg << std::endl;
 			break;
 		case Output::LOGFILE:
-			std::ofstream file(outputFile);
+			std::ofstream file;
+			file.open(outputFile, std::ofstream::out | std::ofstream::app );
 			file << time << " - [" << severityString << "] - " << msg << std::endl;
 			file.close();
 			break;	

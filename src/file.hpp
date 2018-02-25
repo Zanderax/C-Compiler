@@ -3,6 +3,8 @@
 
 #include <string>
 
+typedef unsigned char uchar;
+
 class File
 {
 public:
@@ -10,7 +12,7 @@ public:
 
 	bool Open();
 	size_t Length();
-	bool Read( int posToRead, int charToRead, char * buf );
+	std::string Read();
 
 private:
 	std::string _filePath;

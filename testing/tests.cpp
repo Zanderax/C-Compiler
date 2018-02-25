@@ -2,6 +2,7 @@
 
 #include "log_tests.cpp"
 #include "file_tests.cpp"
+#include "lexer_tests.cpp"
 
 int main(int argc, char **argv)
 {

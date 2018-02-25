@@ -5,6 +5,8 @@
 #include <stdio.h>  /* defines FILENAME_MAX */
 #include <unistd.h>
 #include <iostream>
+#include <fstream>
+#include <string>
 #include "logger.hpp"
  
 std::string GetCurrentWorkingDir( void ) {
@@ -40,15 +42,11 @@ size_t File::Length()
 	return size; 
 }
 
-bool File::Read( int posToRead, int charToRead, char * buf )
+std::string File::Read()
 {
-	if(!_fp)
-	{
-		return false;
-	}
-	size_t pos = ftell( _fp );
-	fseek( _fp, posToRead, SEEK_SET );
-	fgets( buf, charToRead + 1, _fp ); 
-	fseek( _fp, pos, SEEK_SET );
-	return true;
+
+	std::ifstream ifs(_filePath.c_str());
+  	auto content = std::string( (std::istreambuf_iterator<char>(ifs) ),
+                       (std::istreambuf_iterator<char>()    ) );
+	return content;
 }
