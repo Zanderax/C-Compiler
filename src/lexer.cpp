@@ -2,12 +2,12 @@
 
 #include "logger.hpp"
 
-bool isLetter( char c )
+bool IsLetter( char c )
 {
 	return ( c >= 65 && c <= 90 ) || ( c >= 97 && c <= 122 );
 }
 
-bool isPunct( char c )
+bool IsPunct( char c )
 {
 	return (c == '{' || 
 			c == '}' || 
@@ -18,11 +18,21 @@ bool isPunct( char c )
 			c == ',' ); 
 }
 
-bool isWhiteSpace( char c )
+const std::vector<std::string> TypeString 
 {
-	return (c == ' '  || 
-			c == '\n' ||  
-			c == '\t' ); 
+	"int"
+};
+
+bool IsType( std::string text )
+{
+	for( auto type : TypeString )
+	{
+		if(text.compare( type ) == 0)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 void Lexer::Parse( std::string source, Symbols & symbols ) 
@@ -35,7 +45,7 @@ void Lexer::Parse( std::string source, Symbols & symbols )
 	{
 		char c = source.at(pos);
 
-		if(isLetter(c))
+		if(IsLetter(c))
 		{
 			symLen++;
 			continue;
@@ -44,11 +54,15 @@ void Lexer::Parse( std::string source, Symbols & symbols )
 		if(symLen != 0)
 		{
 			Symbol symbol{SymType::TEXT, symLen};
+			if(IsType(source.substr( pos - symLen, symLen)))
+			{
+				symbol.type = SymType::TYPE;
+			}
 			symbols.push_back(symbol);
 			symLen = 0;
 		}
 
-		if(isPunct(c))
+		if(IsPunct(c))
 		{
 			Symbol symbol{SymType::PUNCT, 1};
 			symbols.push_back(symbol);

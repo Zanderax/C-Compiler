@@ -30,6 +30,10 @@ TEST( LexerTest, ParseIntoSymbolsWithType )
 	Symbols symbols;
 	lexer.Parse( c, symbols );
 
-	ASSERT_EQ( symbols.at(0).type, SymType::TEXT ); 
+	ASSERT_EQ( symbols.at(0).type, SymType::TYPE ); 
+	ASSERT_EQ( symbols.at(1).type, SymType::TEXT ); 
 	ASSERT_EQ( symbols.at(2).type, SymType::PUNCT );
+	ASSERT_EQ( symbols.at(3).type, SymType::TYPE ); 
+	ASSERT_EQ( symbols.at(4).type, SymType::TEXT ); 
+	ASSERT_EQ( symbols.at(5).type, SymType::PUNCT );
 }

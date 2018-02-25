@@ -8,7 +8,8 @@ enum SymType
 {
 	NONE,
 	TEXT,
-	PUNCT
+	PUNCT,
+	TYPE
 };
 
 struct Symbol
