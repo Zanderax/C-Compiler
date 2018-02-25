@@ -22,7 +22,7 @@ typedef unsigned char uchar;
 
 typedef std::vector<Symbol> Symbols;
 
-class Lexer
+class Parser 
 {
 public:
 	void Parse(std::string c, Symbols & symbols );

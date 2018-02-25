@@ -1,34 +1,34 @@
-#include "../src/lexer.hpp"
+#include "../src/parser.hpp"
 #include "../src/file.hpp"
 
 #include <string>
 
-TEST( LexerTest, ParseIntoSymbols )
+TEST( ParserTest, ParseIntoSymbols )
 {
 	Logger logger;
 	File file( "testing/res/test_file.c" );
 	file.Open();
 	std::string c = file.Read();
 
-	Lexer lexer;
+	Parser parser;
 
 	Symbols symbols;
-	lexer.Parse( c, symbols );
+	parser.Parse( c, symbols );
 
 	ASSERT_EQ( symbols.size(), 16 ); 
 }
 
-TEST( LexerTest, ParseIntoSymbolsWithType )
+TEST( ParserTest, ParseIntoSymbolsWithType )
 {
 	Logger logger;
 	File file( "testing/res/test_file.c" );
 	file.Open();
 	std::string c = file.Read();
 
-	Lexer lexer;
+	Parser parser;
 
 	Symbols symbols;
-	lexer.Parse( c, symbols );
+	parser.Parse( c, symbols );
 
 	ASSERT_EQ( symbols.at(0).type, SymType::TYPE ); 
 	ASSERT_EQ( symbols.at(1).type, SymType::TEXT ); 

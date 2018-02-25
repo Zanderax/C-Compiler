@@ -1,4 +1,4 @@
-#include "lexer.hpp"
+#include "parser.hpp"
 
 #include "logger.hpp"
 
@@ -35,7 +35,7 @@ bool IsType( std::string text )
 	return false;
 }
 
-void Lexer::Parse( std::string source, Symbols & symbols ) 
+void Parser::Parse( std::string source, Symbols & symbols ) 
 {
 	Logger logger;
 	int len = source.size();

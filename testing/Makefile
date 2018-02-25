@@ -150,33 +150,6 @@ home/wizard/c_compiler/src/file.cpp.s:
 	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/c_compiler/src/file.cpp.s
 .PHONY : home/wizard/c_compiler/src/file.cpp.s
 
-home/wizard/c_compiler/src/lexer.o: home/wizard/c_compiler/src/lexer.cpp.o
-
-.PHONY : home/wizard/c_compiler/src/lexer.o
-
-# target to build an object file
-home/wizard/c_compiler/src/lexer.cpp.o:
-	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/c_compiler/src/lexer.cpp.o
-.PHONY : home/wizard/c_compiler/src/lexer.cpp.o
-
-home/wizard/c_compiler/src/lexer.i: home/wizard/c_compiler/src/lexer.cpp.i
-
-.PHONY : home/wizard/c_compiler/src/lexer.i
-
-# target to preprocess a source file
-home/wizard/c_compiler/src/lexer.cpp.i:
-	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/c_compiler/src/lexer.cpp.i
-.PHONY : home/wizard/c_compiler/src/lexer.cpp.i
-
-home/wizard/c_compiler/src/lexer.s: home/wizard/c_compiler/src/lexer.cpp.s
-
-.PHONY : home/wizard/c_compiler/src/lexer.s
-
-# target to generate assembly for a file
-home/wizard/c_compiler/src/lexer.cpp.s:
-	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/c_compiler/src/lexer.cpp.s
-.PHONY : home/wizard/c_compiler/src/lexer.cpp.s
-
 home/wizard/c_compiler/src/logger.o: home/wizard/c_compiler/src/logger.cpp.o
 
 .PHONY : home/wizard/c_compiler/src/logger.o
@@ -203,6 +176,33 @@ home/wizard/c_compiler/src/logger.s: home/wizard/c_compiler/src/logger.cpp.s
 home/wizard/c_compiler/src/logger.cpp.s:
 	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/c_compiler/src/logger.cpp.s
 .PHONY : home/wizard/c_compiler/src/logger.cpp.s
+
+home/wizard/c_compiler/src/parser.o: home/wizard/c_compiler/src/parser.cpp.o
+
+.PHONY : home/wizard/c_compiler/src/parser.o
+
+# target to build an object file
+home/wizard/c_compiler/src/parser.cpp.o:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/c_compiler/src/parser.cpp.o
+.PHONY : home/wizard/c_compiler/src/parser.cpp.o
+
+home/wizard/c_compiler/src/parser.i: home/wizard/c_compiler/src/parser.cpp.i
+
+.PHONY : home/wizard/c_compiler/src/parser.i
+
+# target to preprocess a source file
+home/wizard/c_compiler/src/parser.cpp.i:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/c_compiler/src/parser.cpp.i
+.PHONY : home/wizard/c_compiler/src/parser.cpp.i
+
+home/wizard/c_compiler/src/parser.s: home/wizard/c_compiler/src/parser.cpp.s
+
+.PHONY : home/wizard/c_compiler/src/parser.s
+
+# target to generate assembly for a file
+home/wizard/c_compiler/src/parser.cpp.s:
+	$(MAKE) -f CMakeFiles/runTests.out.dir/build.make CMakeFiles/runTests.out.dir/home/wizard/c_compiler/src/parser.cpp.s
+.PHONY : home/wizard/c_compiler/src/parser.cpp.s
 
 tests.o: tests.cpp.o
 
@@ -243,12 +243,12 @@ help:
 	@echo "... home/wizard/c_compiler/src/file.o"
 	@echo "... home/wizard/c_compiler/src/file.i"
 	@echo "... home/wizard/c_compiler/src/file.s"
-	@echo "... home/wizard/c_compiler/src/lexer.o"
-	@echo "... home/wizard/c_compiler/src/lexer.i"
-	@echo "... home/wizard/c_compiler/src/lexer.s"
 	@echo "... home/wizard/c_compiler/src/logger.o"
 	@echo "... home/wizard/c_compiler/src/logger.i"
 	@echo "... home/wizard/c_compiler/src/logger.s"
+	@echo "... home/wizard/c_compiler/src/parser.o"
+	@echo "... home/wizard/c_compiler/src/parser.i"
+	@echo "... home/wizard/c_compiler/src/parser.s"
 	@echo "... tests.o"
 	@echo "... tests.i"
 	@echo "... tests.s"

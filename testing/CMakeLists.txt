@@ -9,7 +9,7 @@ include_directories(${GTEST_INCLUDE_DIRS},)
 set( files
 	../src/logger.cpp
 	../src/file.cpp
-	../src/lexer.cpp
+	../src/parser.cpp
 )
 
 # Link runTests with our tests
