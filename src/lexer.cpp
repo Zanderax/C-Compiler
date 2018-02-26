@@ -1,4 +1,4 @@
-#include "parser.hpp"
+#include "lexer.hpp"
 
 #include "logger.hpp"
 
@@ -18,14 +18,14 @@ bool IsPunct( char c )
 			c == ',' ); 
 }
 
-const std::vector<std::string> TypeString 
+const std::vector<std::string> Types 
 {
 	"int"
 };
 
 bool IsType( std::string text )
 {
-	for( auto type : TypeString )
+	for( auto type : Types )
 	{
 		if(text.compare( type ) == 0)
 		{
@@ -35,11 +35,11 @@ bool IsType( std::string text )
 	return false;
 }
 
-void Parser::Parse( std::string source, Symbols & symbols ) 
+void Lexer::ReadTokens( std::string source, Tokens & tokens ) 
 {
 	Logger logger;
 	int len = source.size();
-	int symLen = 0;
+	int tokLen = 0;
 
 	for(int pos = 0; pos < len; ++pos)
 	{
@@ -47,26 +47,26 @@ void Parser::Parse( std::string source, Symbols & symbols )
 
 		if(IsLetter(c))
 		{
-			symLen++;
+			tokLen++;
 			continue;
 		}
 		
-		if(symLen != 0)
+		if(tokLen != 0)
 		{
-			Symbol symbol{SymType::TEXT, symLen};
-			if(IsType(source.substr( pos - symLen, symLen)))
+			Token token{TokenType::TEXT, tokLen};
+			if(IsType(source.substr( pos - tokLen, tokLen)))
 			{
-				symbol.type = SymType::TYPE;
+				token.type = TokenType::TYPE;
 			}
-			symbols.push_back(symbol);
-			symLen = 0;
+			tokens.push_back(token);
+			tokLen = 0;
 		}
 
 		if(IsPunct(c))
 		{
-			Symbol symbol{SymType::PUNCT, 1};
-			symbols.push_back(symbol);
-			symLen = 0;
+			Token token{TokenType::PUNCT, 1};
+			tokens.push_back(token);
+			tokLen = 0;
 		}
 	}
 }

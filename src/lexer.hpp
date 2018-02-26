@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-enum SymType
+enum TokenType
 {
 	NONE,
 	TEXT,
@@ -12,20 +12,20 @@ enum SymType
 	TYPE
 };
 
-struct Symbol
+struct Token
 {
-	SymType type;
+	TokenType type;
 	int length;
 };
 
 typedef unsigned char uchar;
 
-typedef std::vector<Symbol> Symbols;
+typedef std::vector<Token> Tokens;
 
-class Parser 
+class Lexer
 {
 public:
-	void Parse(std::string c, Symbols & symbols );
+	void ReadTokens(std::string c, Tokens & tokens );
 };
 
 
