@@ -9,7 +9,8 @@ enum TokenType
 	NONE,
 	TEXT,
 	PUNCT,
-	TYPE
+	TYPE,
+	KEYWORD
 };
 
 struct Token

@@ -3,7 +3,7 @@
 
 #include <string>
 
-TEST( ReadTokensrTest, ReadTokensIntoTokens )
+TEST( ReadTokensTest, ReadSourceIntoTokens )
 {
 	Logger logger;
 	File file( "testing/res/test_file.c" );
@@ -18,7 +18,7 @@ TEST( ReadTokensrTest, ReadTokensIntoTokens )
 	ASSERT_EQ( tokens.size(), 16 ); 
 }
 
-TEST( ReadTokensrTest, ReadTokensIntoTokensWithType )
+TEST( ReadTokensTest, TokensWithType )
 {
 	Logger logger;
 	File file( "testing/res/test_file.c" );
@@ -36,4 +36,6 @@ TEST( ReadTokensrTest, ReadTokensIntoTokensWithType )
 	ASSERT_EQ( tokens.at(3).type, TokenType::TYPE ); 
 	ASSERT_EQ( tokens.at(4).type, TokenType::TEXT ); 
 	ASSERT_EQ( tokens.at(5).type, TokenType::PUNCT );
+	
+	ASSERT_EQ( tokens.at(10).type, TokenType::KEYWORD );
 }
