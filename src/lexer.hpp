@@ -4,6 +4,12 @@
 #include <vector>
 #include <string>
 
+enum CType
+{
+	CTYPENONE,
+	INT
+};
+
 enum TokenType
 {
 	NONE,
@@ -16,6 +22,7 @@ enum TokenType
 struct Token
 {
 	TokenType type;
+	CType cType;
 	int length;
 };
 

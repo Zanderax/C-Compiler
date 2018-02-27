@@ -70,7 +70,7 @@ void Lexer::ReadTokens( std::string source, Tokens & tokens )
 		
 		if(tokenLen != 0)
 		{
-			Token token{TokenType::TEXT, tokenLen};
+			Token token{TokenType::TEXT, CType::CTYPENONE, tokenLen};
 			if(IsType(source.substr( pos - tokenLen, tokenLen)))
 			{
 				token.type = TokenType::TYPE;
@@ -85,7 +85,7 @@ void Lexer::ReadTokens( std::string source, Tokens & tokens )
 
 		if(IsPunct(c))
 		{
-			Token token{TokenType::PUNCT, 1};
+			Token token{TokenType::PUNCT, CType::CTYPENONE, 1};
 			tokens.push_back(token);
 			tokenLen = 0;
 		}
