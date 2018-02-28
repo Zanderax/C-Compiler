@@ -3,8 +3,8 @@
 
 Tokens TestTokens
 {
-	{TokenType::TYPE, CType::INT, 3},
-	{TokenType::TEXT, CType::CTYPENONE ,3}
+	{TokenType::TYPE, CType::INT, 3, ""},
+	{TokenType::TEXT, CType::CTYPENONE, 3, "add"}
 };
 
 TEST( ParserTest, Parse )
