@@ -16,7 +16,14 @@ enum TokenType
 	TEXT,
 	PUNCT,
 	TYPE,
-	KEYWORD
+	KEYWORD,
+	LPAREN,
+	RPAREN,
+	LBRACE,
+	RBRACE,
+	COMMA,
+	SEMICOLON,
+	PLUS
 };
 
 struct Token

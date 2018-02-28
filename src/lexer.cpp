@@ -28,6 +28,17 @@ const std::vector<std::string> Keywords
 	"return"
 };
 
+const std::map<char, TokenType> Punctuations
+{
+	{ '(', TokenType::LPAREN },
+	{ ')', TokenType::RPAREN },
+	{ '{', TokenType::LBRACE },
+	{ '}', TokenType::RBRACE },
+	{ ',', TokenType::COMMA },
+	{ ';', TokenType::SEMICOLON },
+	{ '+', TokenType::PLUS }
+}; 
+
 bool IsType( std::string text )
 {
 	if(Types.find( text ) == Types.end())
@@ -84,7 +95,7 @@ void Lexer::ReadTokens( std::string source, Tokens & tokens )
 
 		if(IsPunct(c))
 		{
-			Token token{TokenType::PUNCT, CType::CTYPENONE, 1};
+			Token token{Punctuations.find(c)->second, CType::CTYPENONE, 1, std::string{c}};
 			tokens.push_back(token);
 			tokenLen = 0;
 		}
