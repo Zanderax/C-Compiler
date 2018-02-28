@@ -18,9 +18,9 @@ bool IsPunct( char c )
 			c == ',' ); 
 }
 
-const std::vector<std::string> Types 
+const std::map<std::string, CType> Types 
 {
-	"int"
+	{"int", CType::INT}
 };
 
 const std::vector<std::string> Keywords
@@ -30,14 +30,11 @@ const std::vector<std::string> Keywords
 
 bool IsType( std::string text )
 {
-	for( auto type : Types )
+	if(Types.find( text ) == Types.end())
 	{
-		if(text.compare( type ) == 0)
-		{
-			return true;
-		}
+		return false;
 	}
-	return false;
+	return true;
 }
 
 bool IsKeyword( std::string text )
@@ -70,12 +67,14 @@ void Lexer::ReadTokens( std::string source, Tokens & tokens )
 		
 		if(tokenLen != 0)
 		{
+			std::string tokenStr = source.substr( pos - tokenLen, tokenLen);
 			Token token{TokenType::TEXT, CType::CTYPENONE, tokenLen};
-			if(IsType(source.substr( pos - tokenLen, tokenLen)))
+			if(IsType(tokenStr))
 			{
 				token.type = TokenType::TYPE;
+				token.cType = Types.find(tokenStr)->second;
 			}
-			if(IsKeyword(source.substr( pos - tokenLen, tokenLen)))
+			if(IsKeyword(tokenStr))
 			{
 				token.type = TokenType::KEYWORD;
 			}
