@@ -68,7 +68,7 @@ void Lexer::ReadTokens( std::string source, Tokens & tokens )
 		if(tokenLen != 0)
 		{
 			std::string tokenStr = source.substr( pos - tokenLen, tokenLen);
-			Token token{TokenType::TEXT, CType::CTYPENONE, tokenLen};
+			Token token{TokenType::TEXT, CType::CTYPENONE, tokenLen, tokenStr};
 			if(IsType(tokenStr))
 			{
 				token.type = TokenType::TYPE;

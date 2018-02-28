@@ -24,6 +24,7 @@ struct Token
 	TokenType type;
 	CType cType;
 	int length;
+	std::string spelling;
 };
 
 typedef unsigned char uchar;
