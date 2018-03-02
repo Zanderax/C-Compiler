@@ -6,13 +6,17 @@
 
 #include "lexer.hpp"
 
+typedef size_t index_t;
+
 enum NodeType
 {
 	NODETYPENONE,
 	ROOT,
 	FUNCTION_DECL,
 	VARIABLE_DECL,
-	ARGUMENT
+	ARGUMENT,
+	BLOCK,
+	STATEMENT
 };
 
 struct Node;

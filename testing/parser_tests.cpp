@@ -12,7 +12,12 @@ Tokens TestTokens
 	{TokenType::TYPE, CType::INT, 3, "int"},
 	{TokenType::TEXT, CType::CTYPENONE, 1, "b"},
 	{TokenType::RPAREN, CType::CTYPENONE, 1, ")"},
+	{TokenType::KEYWORD, CType::CTYPENONE, 1, "return"},
+	{TokenType::TEXT, CType::CTYPENONE, 1, "a"},
+	{TokenType::PLUS, CType::CTYPENONE, 1, "+"},
+	{TokenType::TEXT, CType::CTYPENONE, 1, "b"},
 	{TokenType::SEMICOLON, CType::CTYPENONE, 1, ";"},
+	{TokenType::LPAREN, CType::CTYPENONE, 1, ")"},
 };
 
 TEST( ParserTest, Parse )
@@ -30,7 +35,7 @@ TEST( ParserTest, Parse )
 	ASSERT_EQ( node.type, NodeType::FUNCTION_DECL); 
 	ASSERT_EQ( node.cType, CType::INT ); 
 	ASSERT_EQ( node.spelling, "add" );
-	ASSERT_EQ( node.children.size(), 2 );
+	ASSERT_EQ( node.children.size(), 3 );
 
 	Node a = node.children[0];
 
@@ -45,6 +50,12 @@ TEST( ParserTest, Parse )
 	ASSERT_EQ( b.cType, CType::INT ); 
 	ASSERT_EQ( b.spelling, "b" );
 	ASSERT_EQ( b.children.size(), 0 );
-
 	
+	Node block = node.children[2];
+
+	ASSERT_EQ( block.type, NodeType::BLOCK); 
+	ASSERT_EQ( block.cType, CType::CTYPENONE ); 
+	ASSERT_EQ( block.spelling, "" );
+	ASSERT_EQ( block.children.size(), 1 );
+
 }
