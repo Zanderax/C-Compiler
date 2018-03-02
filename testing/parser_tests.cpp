@@ -3,8 +3,16 @@
 
 Tokens TestTokens
 {
-	{TokenType::TYPE, CType::INT, 3, ""},
-	{TokenType::TEXT, CType::CTYPENONE, 3, "add"}
+	{TokenType::TYPE, CType::INT, 3, "int"},
+	{TokenType::TEXT, CType::CTYPENONE, 3, "add"},
+	{TokenType::LPAREN, CType::CTYPENONE, 1, "("},
+	{TokenType::TYPE, CType::INT, 3, "int"},
+	{TokenType::TEXT, CType::CTYPENONE, 1, "a"},
+	{TokenType::COMMA, CType::CTYPENONE, 1, ","},
+	{TokenType::TYPE, CType::INT, 3, "int"},
+	{TokenType::TEXT, CType::CTYPENONE, 1, "b"},
+	{TokenType::RPAREN, CType::CTYPENONE, 1, ")"},
+	{TokenType::SEMICOLON, CType::CTYPENONE, 1, ";"},
 };
 
 TEST( ParserTest, Parse )
@@ -21,5 +29,6 @@ TEST( ParserTest, Parse )
 	 
 	ASSERT_EQ( node.type, NodeType::FUNCTION_DECL); 
 	ASSERT_EQ( node.cType, CType::INT ); 
-	ASSERT_EQ( node.spelling, "add" ); 
+	ASSERT_EQ( node.spelling, "add" );
+	ASSERT_EQ( node.children.size(), 2 ); 
 }
