@@ -30,5 +30,21 @@ TEST( ParserTest, Parse )
 	ASSERT_EQ( node.type, NodeType::FUNCTION_DECL); 
 	ASSERT_EQ( node.cType, CType::INT ); 
 	ASSERT_EQ( node.spelling, "add" );
-	ASSERT_EQ( node.children.size(), 2 ); 
+	ASSERT_EQ( node.children.size(), 2 );
+
+	Node a = node.children[0];
+
+	ASSERT_EQ( a.type, NodeType::ARGUMENT); 
+	ASSERT_EQ( a.cType, CType::INT ); 
+	ASSERT_EQ( a.spelling, "a" );
+	ASSERT_EQ( a.children.size(), 0 );
+
+	Node b = node.children[1];
+
+	ASSERT_EQ( b.type, NodeType::ARGUMENT); 
+	ASSERT_EQ( b.cType, CType::INT ); 
+	ASSERT_EQ( b.spelling, "b" );
+	ASSERT_EQ( b.children.size(), 0 );
+
+	
 }
