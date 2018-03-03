@@ -8,33 +8,41 @@
 
 typedef size_t index_t;
 
-enum NodeType
-{
-	NODETYPENONE,
-	ROOT,
-	FUNCTION_DECL,
-	VARIABLE_DECL,
-	ARGUMENT,
-	BLOCK,
-	STATEMENT
-};
-
-struct Node;
-
-typedef std::vector<Node> Nodes;
-
 struct Node
 {
-	NodeType type;
-	CType cType;
-	std::string spelling;
-	Nodes children;
 };
+typedef std::vector<Node> Nodes;
+
+struct Argument : public Node
+{
+	std::string spelling;
+	CType cType;
+};
+typedef std::vector<Argument> Arguments;
+
+struct Statement : public Node
+{
+};
+typedef std::vector<Statement> Statements;
+
+struct Block : public Node
+{
+	Statements statements;
+};
+
+struct Function : public Node
+{
+	std::string spelling;
+	CType cType;
+	Arguments arguments;
+	Block block;
+};
+typedef std::vector<Function> Functions;
 
 struct AST
 {
 public:
-	Node root {NodeType::ROOT};
+	Functions functions;
 };
 
 class Parser

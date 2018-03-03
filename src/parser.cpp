@@ -3,7 +3,7 @@
 
 Logger logger;
 
-void SetFunctionArgs( Node & node, Tokens tokens, index_t i )
+void SetFunctionArgs( Function & func, Tokens tokens, index_t i )
 {
 	if( tokens[i].type == TokenType::RPAREN)
 	{
@@ -14,8 +14,10 @@ void SetFunctionArgs( Node & node, Tokens tokens, index_t i )
 		if(tokens[i].type == TokenType::TYPE &&
 			tokens[i+1].type == TokenType::TEXT  )
 		{
-			Node arg{NodeType::ARGUMENT, tokens[i].cType, tokens[i+1].spelling };
-			node.children.push_back(arg);
+			Argument arg;
+			arg.cType = tokens[i].cType;
+			arg.spelling = tokens[i+1].spelling;
+			func.arguments.push_back(arg);
 			if(tokens[i+2].type == TokenType::COMMA)
 			{
 				i += 3;
@@ -28,15 +30,15 @@ void SetFunctionArgs( Node & node, Tokens tokens, index_t i )
 }
 
 
-Node CreateFunctionBlock( Tokens tokens, index_t & i )
+Block CreateFunctionBlock( Tokens tokens, index_t & i )
 {
-	Node block{ NodeType::BLOCK };
+	Block block;
 	for(size_t t = i; t < tokens.size(); ++t)
 	{
 		if(tokens[t].type == TokenType::SEMICOLON)
 		{
-			Node statement{ NodeType::STATEMENT };
-			block.children.push_back( statement );
+			Statement statement;
+			block.statements.push_back( statement );
 			if(tokens[t].type == TokenType::RPAREN )
 			{
 				return block;
@@ -46,11 +48,13 @@ Node CreateFunctionBlock( Tokens tokens, index_t & i )
 	return block;
 }
 
-Node CreateFunctionSymbol( Tokens tokens, index_t & i )
+Function CreateFunctionSymbol( Tokens tokens, index_t & i )
 {
-	Node func{NodeType::FUNCTION_DECL, tokens[0].cType, tokens[1].spelling, Nodes{} };
+	Function func;
+	func.cType = tokens[0].cType;
+	func.spelling = tokens[1].spelling;
 	SetFunctionArgs(func, tokens, 3);
-	func.children.push_back( CreateFunctionBlock( tokens, i ) );
+	func.block = CreateFunctionBlock( tokens, i );
 	return func;
 }
 
@@ -61,6 +65,6 @@ bool Parser::Parse( Tokens tokens, AST & tree )
 		tokens[2].type == TokenType::LPAREN )
 	{
 		index_t i = 0;
-		tree.root.children.push_back( CreateFunctionSymbol( tokens, i ) );
+		tree.functions.push_back( CreateFunctionSymbol( tokens, i ) );
 	}
 }
