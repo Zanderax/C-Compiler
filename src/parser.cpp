@@ -3,68 +3,104 @@
 
 Logger logger;
 
-void SetFunctionArgs( Function & func, Tokens tokens, index_t i )
+Tokens _tokens;
+index_t tok_i = 0;
+
+Token * GetNextToken()
 {
-	if( tokens[i].type == TokenType::RPAREN)
+	if(tok_i >= _tokens.size())
+	{
+		logger.log("Reached EoF Unexpectedly");
+		return nullptr;
+	}
+	return &_tokens[tok_i++];
+}
+
+bool NextTokenValid()
+{
+	return tok_i + 1 < _tokens.size(); 
+}
+
+
+void Function::SetArgs()
+{
+	Token * token = GetNextToken();
+	
+	if(token->type == TokenType::RPAREN)
 	{
 		return;
 	}
-	while( i < tokens.size() )
-	{
-		if(tokens[i].type == TokenType::TYPE &&
-			tokens[i+1].type == TokenType::TEXT  )
-		{
-			Argument arg;
-			arg.cType = tokens[i].cType;
-			arg.spelling = tokens[i+1].spelling;
-			func.arguments.push_back(arg);
-			if(tokens[i+2].type == TokenType::COMMA)
-			{
-				i += 3;
-				continue;
-			}
-		}
 
-		return;
+	while( token )
+	{
+		Argument arg;
+
+		token = GetNextToken();
+		arg.cType = token->cType;
+
+		token = GetNextToken();
+		arg.spelling = token->spelling;
+	
+		arguments.push_back(arg);
+		
+		token = GetNextToken();
+
+		if(token->type != TokenType::COMMA)
+		{
+			if(token->type != TokenType::RPAREN)
+			{
+				logger.log("Expected Comma in arg list");
+			}
+			return;
+		}
 	}
 }
 
 
-Block CreateFunctionBlock( Tokens tokens, index_t & i )
+void Function::SetBlock()
 {
 	Block block;
-	for(size_t t = i; t < tokens.size(); ++t)
+	Token * token = GetNextToken();
+	if(token->type == TokenType::LBRACE )
 	{
-		if(tokens[t].type == TokenType::SEMICOLON)
+		logger.log("Left brace expected");
+		return;
+	}
+
+	token = GetNextToken();
+	while( token )
+	{
+		if(token->type == TokenType::SEMICOLON)
 		{
 			Statement statement;
 			block.statements.push_back( statement );
-			if(tokens[t].type == TokenType::RPAREN )
-			{
-				return block;
-			}
 		}
+		if(token->type == TokenType::RBRACE )
+		{
+			_block = block;
+			return;
+		}
+		token = GetNextToken();
 	}
-	return block;
 }
 
-Function CreateFunctionSymbol( Tokens tokens, index_t & i )
+void AST::ParseFunction() 
 {
 	Function func;
-	func.cType = tokens[0].cType;
-	func.spelling = tokens[1].spelling;
-	SetFunctionArgs(func, tokens, 3);
-	func.block = CreateFunctionBlock( tokens, i );
-	return func;
+	func.cType = GetNextToken()->cType;
+	func.spelling = GetNextToken()->spelling;
+	func.SetArgs();
+	func.SetBlock();
+	functions.push_back( func );
 }
 
 bool Parser::Parse( Tokens tokens, AST & tree )
 {
-	if(tokens[0].type == TokenType::TYPE &&
-		tokens[1].type == TokenType::TEXT &&
-		tokens[2].type == TokenType::LPAREN )
+	_tokens = tokens;
+	tok_i = 0;
+	while( NextTokenValid() )
 	{
-		index_t i = 0;
-		tree.functions.push_back( CreateFunctionSymbol( tokens, i ) );
+		tree.ParseFunction();
 	}
+	return true;
 }

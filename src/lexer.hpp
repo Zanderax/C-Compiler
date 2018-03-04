@@ -23,8 +23,10 @@ enum TokenType
 	RBRACE,
 	COMMA,
 	SEMICOLON,
-	PLUS
+	PLUS,
+	MINUS
 };
+
 
 struct Token
 {
